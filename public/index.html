@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#111827">
+  <title>Live Shared Drawing Board</title>
+  <link rel="stylesheet" href="/style.css">
+  <script src="/socket.io/socket.io.js" defer></script>
+  <script src="/client.js" defer></script>
+</head>
+<body>
+  <main class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <div class="brand-mark" aria-hidden="true">✳</div>
+        <div>
+          <h1>Shared Canvas</h1>
+          <p>Make something together.</p>
+        </div>
+      </div>
+      <div class="connection-status">
+        <span id="connection-dot" class="status-dot"></span>
+        <span id="connection-text">Connecting…</span>
+      </div>
+    </header>
+
+    <section class="intro">
+      <div>
+        <p class="eyebrow">LIVE COLLABORATION</p>
+        <h2>One canvas. Everyone's ideas.</h2>
+        <p class="subtitle">Draw together in real time. Every connected person sees the same board.</p>
+      </div>
+      <div class="people-pill">
+        <span class="people-icon" aria-hidden="true">◉</span>
+        <strong id="user-count">0</strong>
+        <span id="user-label">people online</span>
+      </div>
+    </section>
+
+    <section class="toolbar" aria-label="Drawing tools">
+      <div class="tool-group color-group">
+        <label for="color-picker">Brush color</label>
+        <div class="color-controls">
+          <input id="color-picker" type="color" value="#6759e8" aria-label="Choose brush color">
+          <div class="swatches" aria-label="Quick colors">
+            <button class="swatch selected" type="button" data-color="#6759e8" style="--swatch:#6759e8" aria-label="Purple"></button>
+            <button class="swatch" type="button" data-color="#ef476f" style="--swatch:#ef476f" aria-label="Pink"></button>
+            <button class="swatch" type="button" data-color="#06a77d" style="--swatch:#06a77d" aria-label="Green"></button>
+            <button class="swatch" type="button" data-color="#ff9f1c" style="--swatch:#ff9f1c" aria-label="Orange"></button>
+            <button class="swatch" type="button" data-color="#202938" style="--swatch:#202938" aria-label="Dark gray"></button>
+            <button class="swatch" type="button" data-color="#ffffff" style="--swatch:#ffffff" aria-label="White"></button>
+          </div>
+        </div>
+      </div>
+      <div class="tool-group brush-group">
+        <div class="range-heading">
+          <label for="brush-size">Brush size</label>
+          <span><strong id="brush-size-value">6</strong> px</span>
+        </div>
+        <input id="brush-size" type="range" min="2" max="30" value="6">
+      </div>
+      <div class="toolbar-spacer"></div>
+      <button id="clear-button" class="clear-button" type="button">
+        <span aria-hidden="true">⌫</span> Clear board
+      </button>
+    </section>
+
+    <section class="canvas-card">
+      <div class="canvas-heading">
+        <span><span class="live-indicator"></span> Shared drawing board</span>
+        <span class="canvas-hint">Click and drag to draw</span>
+      </div>
+      <div id="canvas-wrap" class="canvas-wrap">
+        <canvas id="drawing-canvas" aria-label="Shared drawing canvas"></canvas>
+        <div id="empty-state" class="empty-state">
+          <div class="empty-icon" aria-hidden="true">✎</div>
+          <strong>The canvas is yours</strong>
+          <span>Start drawing. Everyone online will see it.</span>
+        </div>
+      </div>
+      <div class="canvas-footer">
+        <span><span class="keyboard-key">Mouse</span> or <span class="keyboard-key">Touch</span> to draw</span>
+        <span>Changes appear live for everyone</span>
+      </div>
+    </section>
+
+    <footer>
+      <span>Built for creating together.</span>
+      <span class="footer-tech">Node.js <i></i> Express <i></i> Socket.IO</span>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

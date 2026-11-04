@@ -1,8 +1,0 @@
-services:
-  - type: web
-    name: live-shared-drawing-board
-    runtime: node
-    plan: free
-    buildCommand: npm install
-    startCommand: npm start
-    healthCheckPath: /health
